@@ -1,24 +1,25 @@
 console.log ('Starting app.');
-
 const fs = require ('fs');
-const os = require('os');
-const notes = require ('./notes.js');
-// Load the full build.
 const _ = require('lodash');
+const yargs = require('yargs');
 
-var user = os.userInfo();
+const notes = require ('./notes.js');
+var command = process.argv[2];
+const argv = yargs.argv;
+console.log ('Yargs: ', argv);
+// console.log ('Command:', command);
+// console.log (process.argv);
 
-// fs.appendFile ('greetings.txt', `Hello ${user.username} !\r\n`, (err) => {
-//     if (err) console.log ( err );
-// });
-
-// console.log (notes.age);
-// var res = notes.addNote();
-// console.log (res);
-// console.log (notes.add(3,4));
-
-// console.log (_.isString(true));
-// console.log (_.isString('Andrew'));
-
-var filteredArray=_.uniq(['Dave', 1, 'John', 1,2,3,4]);
-console.log (filteredArray);
+if (command === 'add') {
+    notes.addNote(argv.title, argv.body);
+} else if (command === 'list') {
+    notes.getAll();
+} else if (command === 'read') {
+    console.log ('reading note');
+    notes.readNote(argv.title);
+} else if (command === 'remove') {
+   console.log ('remove note');
+   notes.removeNote(argv.title);
+} else {
+    console.log ('Command not recognized');
+}
