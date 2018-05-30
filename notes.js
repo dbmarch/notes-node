@@ -41,15 +41,23 @@ var addNote  = (title, body) => {
 
 var getAll = () => {
     console.log ('getAll');
-    fs.readFileSync
+    return fetchNotes();
 }
 
 var readNote = (title) => {
     console.log ('readNote: ', title);
-}
+    var notes = fetchNotes();
+    var foundNote = notes.filter((note) => (note.title === title));
+    if ( foundNote.length > 0){
+        return foundNote[0];
+    } 
+}   
 
 var removeNote = (title) => {
-    console.log ('removeNote: ', title);
+    var notes = fetchNotes();
+    var filteredNotes = notes.filter((note) => (note.title !== title));
+    saveNotes(filteredNotes);
+    return notes.length !== filteredNotes.length;
 }
 
 module.exports = {
