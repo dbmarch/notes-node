@@ -22,4 +22,4 @@ var user = {
 
 user.sayHi();
 user.SayHiAlt();
-user.SayHiAlt(1,2,3)
+user.SayHiAlt(1,2,3);
